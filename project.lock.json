@@ -1,0 +1,83 @@
+{
+  "locked": false,
+  "version": 2,
+  "targets": {
+    ".NETFramework,Version=v4.5": {
+      "Microsoft.AspNet.SignalR.Client/2.2.1": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "6.0.4"
+        },
+        "compile": {
+          "lib/net45/Microsoft.AspNet.SignalR.Client.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.AspNet.SignalR.Client.dll": {}
+        }
+      },
+      "Newtonsoft.Json/9.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.AspNet.SignalR.Client/2.2.1": {
+      "sha512": "ecup1Ztcr9DnLOZo7VQb5ViM8tfip35Bi/IzIOc62KHLdWM5xr1tefOIeQ8sV8h4jF30PIOomFsTr/mSpuw+4Q==",
+      "type": "package",
+      "path": "Microsoft.AspNet.SignalR.Client/2.2.1",
+      "files": [
+        "Microsoft.AspNet.SignalR.Client.2.2.1.nupkg.sha512",
+        "Microsoft.AspNet.SignalR.Client.nuspec",
+        "lib/net40/Microsoft.AspNet.SignalR.Client.XML",
+        "lib/net40/Microsoft.AspNet.SignalR.Client.dll",
+        "lib/net45/Microsoft.AspNet.SignalR.Client.XML",
+        "lib/net45/Microsoft.AspNet.SignalR.Client.dll",
+        "lib/netcore50/Microsoft.AspNet.SignalR.Client.XML",
+        "lib/netcore50/Microsoft.AspNet.SignalR.Client.dll",
+        "lib/portable-net45+sl50+win+wpa81+wp80/Microsoft.AspNet.SignalR.Client.XML",
+        "lib/portable-net45+sl50+win+wpa81+wp80/Microsoft.AspNet.SignalR.Client.dll",
+        "lib/portable-win81+wpa81/Microsoft.AspNet.SignalR.Client.XML",
+        "lib/portable-win81+wpa81/Microsoft.AspNet.SignalR.Client.dll"
+      ]
+    },
+    "Newtonsoft.Json/9.0.1": {
+      "sha512": "U82mHQSKaIk+lpSVCbWYKNavmNH1i5xrExDEquU1i6I5pV6UMOqRnJRSlKO3cMPfcpp0RgDY+8jUXHdQ4IfXvw==",
+      "type": "package",
+      "path": "Newtonsoft.Json/9.0.1",
+      "files": [
+        "Newtonsoft.Json.9.0.1.nupkg.sha512",
+        "Newtonsoft.Json.nuspec",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "tools/install.ps1"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "Microsoft.AspNet.SignalR.Client >= 2.2.1",
+      "Newtonsoft.Json >= 9.0.1"
+    ],
+    ".NETFramework,Version=v4.5": []
+  },
+  "tools": {},
+  "projectFileToolGroups": {}
+}
