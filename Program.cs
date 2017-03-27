@@ -1,11 +1,10 @@
 ﻿using System;
-using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.SignalR.Client;
 using Newtonsoft.Json;
+using Microsoft.AspNet.SignalR.Client;
 
 namespace KuduCommandSignalR
 {
@@ -48,6 +47,7 @@ namespace KuduCommandSignalR
     public class Program
     {
         private static string argvHost, argvUsername, argvPassword, argvCommand;
+        private static bool optDebugTrace = false;
 
         private static Connection _connection;
         private static ManualResetEvent _closedEvent = new ManualResetEvent(false);
@@ -58,13 +58,34 @@ namespace KuduCommandSignalR
         private static async Task SignalRTask()
         {
             _connection = new Connection($"https://{argvHost}/api/commandstream", "shell=CMD");
+
             _connection.Credentials = new NetworkCredential(argvUsername, argvPassword);
+            _connection.Error += CommandError;
             _connection.Received += DataReceived;
             _connection.Closed += ConnectionClosed;
+
+            if (optDebugTrace)
+            {
+                _connection.TraceLevel = TraceLevels.All;
+                _connection.TraceWriter = Console.Out;
+                _connection.StateChanged += ConnectionStateChanged;
+            }
+
             _commandReadyEvent += CommandReady;
             _outputLineReceivedEvent += OutputLineReceived;
             Console.WriteLine($"[kudu] Connecting to Kudu service at `{argvHost}`...");
             await _connection.Start();
+        }
+
+        private static void ConnectionStateChanged(StateChange obj)
+        {
+            Console.WriteLine("[kudu] DEBUG: State changed to {0}", obj.NewState.ToString());
+        }
+
+        private static void CommandError(Exception obj)
+        {
+            Console.WriteLine("[kudu] Error: {0}", obj.Message);
+            _connection.Stop();
         }
 
         private static void ConnectionClosed()
@@ -120,7 +141,7 @@ namespace KuduCommandSignalR
 
         public static void Main(string[] args)
         {
-            if (args.Length != 4)
+            if (args.Length < 4)
             {
                 Console.WriteLine("Usage: KuduCommandSignalR.exe [host] [username] [password] [command]");
                 return;
@@ -131,8 +152,26 @@ namespace KuduCommandSignalR
             argvPassword = args[2];
             argvCommand = args[3];
 
+            if (args.Length > 4)
+            {
+                for (int i = 4; i < args.Length; ++i)
+                {
+                    switch (args[i])
+                    {
+                        case "--debug":
+                            optDebugTrace = true;
+                            break;
+                        default:
+                            Console.WriteLine("Unknown argv {0}", args[i]);
+                            return;
+                    }
+                }
+            }
+
             SignalRTask().Wait();
             _closedEvent.WaitOne();
+
+            Console.WriteLine("[kudu] Exiting...");
         }
     }
 }
